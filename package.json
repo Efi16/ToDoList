@@ -1,11 +1,8 @@
 {
   "dependencies": {
+    "@vue/eslint-config-airbnb": "^8.0.0",
     "axios": "^1.12.2",
     "element-ui": "^2.15.14",
     "vue": "^2.7.16"
-  },
-  "devDependencies": {
-    "eslint": "^9.36.0",
-    "eslint-plugin-vue": "^10.4.0"
   }
 }
