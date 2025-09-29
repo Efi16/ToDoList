@@ -12,7 +12,7 @@
     "@rushstack/eslint-patch": "^1.12.0",
     "@vue/eslint-config-airbnb": "^8.0.0",
     "axios": "^1.12.2",
-    "element-ui": "^0.2.6",
+    "element-ui": "^2.15.14",
     "vue": "^2.7.7"
   },
   "devDependencies": {
