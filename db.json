@@ -2,19 +2,38 @@
   "tasks": [
     {
       "id": "ed67",
-      "name": "To DO List"
+      "name": "To DO List",
+      "checked": false
     },
     {
-      "id": "2bea",
-      "name": "SDFGDHGJ"
+      "id": "99e6",
+      "name": "props",
+      "checked": true
     },
     {
-      "id": "2e32",
-      "name": "SDGHNM,/."
+      "id": "dab2",
+      "name": "templates",
+      "checked": false
     },
     {
-      "id": "634c",
-      "name": "SDFGHJ"
+      "id": "b2cb",
+      "name": "what it is",
+      "checked": true
+    },
+    {
+      "id": "2be5",
+      "name": "sdfghgjkhl",
+      "checked": false
+    },
+    {
+      "id": "aef0",
+      "name": "esfgrdhjgkh",
+      "checked": false
+    },
+    {
+      "id": "b0f3",
+      "name": "esfgrdhjgkh",
+      "checked": false
     }
   ]
 }

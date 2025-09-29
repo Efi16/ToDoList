@@ -1,6 +1,8 @@
 <script setup>
 import api from "@/services/api";
+import TaskItem from "./TaskItem.vue";
 import { ref } from "vue";
+
 const tasks = ref([]);
 const newTaskName = ref("");
 
@@ -11,6 +13,7 @@ const fetchTasks = async () => {
       tasks.value = response.data.map((task) => ({
         id: task.id,
         name: task.name,
+        checked: task.checked,
       }));
     } else {
       console.warn("Неверные данные.");
@@ -26,61 +29,79 @@ const addTask = async () => {
   try {
     const response = await api.post("/tasks", {
       name: newTaskName.value,
+      checked: false,
     });
-    tasks.value.push({ id: response.data.id, name: response.data.name });
+    tasks.value.push({
+      id: response.data.id,
+      name: response.data.name,
+      checked: false,
+    });
     newTaskName.value = "";
+    fetchTasks();
   } catch (error) {
     console.error("Ошибка добавления задачи:", error);
   }
 };
+
+const deleteTask = async (id) => {
+  try {
+    await api.delete(`/tasks/${id}`);
+    tasks.value = tasks.value.filter((task) => task.id !== id);
+    await fetchTasks();
+  } catch (error) {
+    console.error("Ошибка удаления задачи:", error);
+  }
+};
+
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     addTask();
   }
 });
-const deleteTask = async (taskId) => {
+const updateTaskChecked = async ({ id, checked }) => {
   try {
-    await api.delete(`/tasks/${taskId}`);
-    tasks.value = tasks.value.filter((task) => task.id !== taskId);
+    await api.patch(`/tasks/${id}`, {
+      checked: checked,
+    });
+    await fetchTasks();
   } catch (error) {
-    console.error("Ошибка удаления задачи:", error);
+    console.error("Ошибка обновления состояния задачи:", error);
   }
 };
 </script>
 
 <template>
   <div>
-    <el-container>
-      <!-- Форма для добавления задачи -->
-      <el-input v-model="newTaskName" placeholder="Название новой задачи" />
-      <el-button
-        @click="addTask"
-        type="success"
-        icon="el-icon-circle-plus-outline"
-        >Add</el-button
-      >
-    </el-container>
+    <!-- Форма для добавления задачи -->
+    <el-row>
+      <el-col :span="20" :offset="1">
+        <el-input v-model="newTaskName" placeholder="Название новой задачи" />
+      </el-col>
+      <el-col :span="2" :offset="1">
+        <el-button
+          @click="addTask"
+          type="success"
+          icon="el-icon-circle-plus-outline"
+          >Add</el-button
+        >
+      </el-col>
+    </el-row>
     <!-- Список задач -->
-    <el-container class="task-list">
-      <ul>
-        <li v-for="task in tasks" :key="task.id">
-          <el-row>
-            <el-col :span="12"
-              ><p>{{ task.name }}</p></el-col
-            >
-            <el-col :span="2" :offset="10">
-              <el-button
-                id="delete-button"
-                @click="deleteTask(task.id)"
-                icon="el-icon-close"
-                type="danger"
-                >Delete</el-button
-              >
-            </el-col>
-          </el-row>
-        </li>
-      </ul>
-    </el-container>
+    <el-row>
+      <el-col :span="24">
+        <el-container>
+          <ul>
+            <TaskItem
+              v-for="task in tasks"
+              :key="task.id"
+              :task="task"
+              @delete="deleteTask"
+              @update:checked="updateTaskChecked"
+            />
+          </ul>
+        </el-container>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -102,5 +123,6 @@ p {
 li {
   margin-top: 12px;
   background-color: rgba(135, 206, 250, 0.3);
+  white-space: break-spaces;
 }
 </style>
