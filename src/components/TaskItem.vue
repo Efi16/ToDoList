@@ -2,13 +2,11 @@
 const props = defineProps({
   task: {
     type: Object,
-    required: true,
+    required: false,
     default: () => ({ id: null, name: "", checked: false }),
   },
 });
-
 const emit = defineEmits(["delete", "update:checked"]);
-
 const deleteTask = () => {
   emit("delete", props.task.id);
 };
@@ -19,19 +17,32 @@ const updateChecked = (newChecked) => {
 
 <template>
   <el-row>
-    <el-col :span="20" :offset="1" class="task-col">
-      <el-checkbox v-model="task.checked" @change="updateChecked">{{
-        task.name
-      }}</el-checkbox>
+    <el-col 
+      :span="20" 
+      :offset="1" 
+      class="task-col"
+    >
+      <el-checkbox 
+        :value="task.checked" 
+        @change="updateChecked"
+      >
+        {{
+          task.name
+        }} 
+      </el-checkbox>
     </el-col>
-    <el-col :span="2" :offset="1">
+    <el-col 
+      :span="2" 
+      :offset="1"
+    >
       <el-button
         id="delete-button"
-        @click="deleteTask"
         icon="el-icon-close"
         type="danger"
-        >Del</el-button
+        @click="deleteTask"
       >
+        Del
+      </el-button> 
     </el-col>
   </el-row>
 </template>

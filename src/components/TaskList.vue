@@ -74,16 +74,23 @@ const updateTaskChecked = async ({ id, checked }) => {
   <div>
     <!-- Форма для добавления задачи -->
     <el-row>
-      <el-col :span="20" :offset="1">
-        <el-input v-model="newTaskName" placeholder="Название новой задачи" />
+      <el-col 
+        :span="20" 
+        :offset="1"
+      >
+        <el-input v-model="newTaskName" />
       </el-col>
-      <el-col :span="2" :offset="1">
+      <el-col 
+        :span="2" 
+        :offset="1"
+      >
         <el-button
-          @click="addTask"
           type="success"
           icon="el-icon-circle-plus-outline"
-          >Add</el-button
+          @click="addTask"
         >
+          Add
+        </el-button>
       </el-col>
     </el-row>
     <!-- Список задач -->

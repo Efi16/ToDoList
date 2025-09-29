@@ -6,7 +6,8 @@
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "lint:js": "eslint src/*.js"
   },
   "dependencies": {
     "@rushstack/eslint-patch": "^1.12.0",
@@ -16,9 +17,16 @@
     "vue": "^2.7.7"
   },
   "devDependencies": {
+    "@eslint/js": "^9.36.0",
     "@vitejs/plugin-legacy": "^7.2.1",
     "@vitejs/plugin-vue2": "^1.1.2",
+    "eslint": "^9.36.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^10.5.0",
+    "prettier": "^3.6.2",
     "terser": "^5.14.2",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }

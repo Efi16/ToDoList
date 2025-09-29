@@ -5,7 +5,9 @@ import TaskList from "./components/TaskList.vue";
 <template>
   <div id="app">
     <header>
-      <h1 class="main">To Do List</h1>
+      <h1 class="main">
+        To Do List
+      </h1>
     </header>
 
     <main>
